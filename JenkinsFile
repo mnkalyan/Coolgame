@@ -21,8 +21,10 @@ def build () {
 def runUnitTest() {
 	stage ('Run Unit Test') {
 		sh '''
-			$WORKSPACE/build/CoolGame
-			$WORKSPACE/build/runUnitTests
+			if [[ "${RUN_UNIT_TESTS}" == "true" ]]; then
+				$WORKSPACE/build/CoolGame
+				$WORKSPACE/build/runUnitTests
+			fi
 		'''
 	}
 }
