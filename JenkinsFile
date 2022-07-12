@@ -4,8 +4,10 @@ import groovy.json.JsonSlurper
 
 // Checkout Stage
 def checkout() {
-	stage ('Code Checkout') {
+	if ("${CLEAN_WS}" == "true") {
 		cleanWs()
+	}
+	stage ('Code Checkout') {
 		checkout([$class: 'GitSCM', branches: [[name: '${BRANCH_NAME}']], extensions: [], userRemoteConfigs: [[credentialsId: '808beb4a-c1c0-4900-a3a3-2c4cdbcd876b', url: 'git@github.com:mnkalyan/Coolgame.git']]])
 	}
 }
@@ -37,9 +39,17 @@ def artifactsArchive() {
 }
 
 //Call the above defined functions
-node ("${env.NODE}") {
-	checkout()
-	build ()
-	runUnitTest ()
-	artifactsArchive ()
+try {
+	node ("${env.NODE}") {
+		checkout()
+		build ()
+		runUnitTest ()
+		artifactsArchive ()
+	}
+} catch (any) {
+	println(any.toString());
+	println(any.getMessage());
+	currentBuild.result = 'FAILED'
+} finally {
+	println "Overall Job Status is: "+currentBuild.result
 }
