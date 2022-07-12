@@ -52,7 +52,8 @@ try {
 	println(any.getMessage());
 	currentBuild.result = 'FAILED'
 } finally {
-	for (String i : readFile('testLog.txt').split()) {
+	for (String i : readFile('testLog.txt').split("\n")) {
+		println i
 		if ( i =~ Failure  || i =~ FAILED ) {
 			currentBuild.result = 'UNSTABLE'
 		}
