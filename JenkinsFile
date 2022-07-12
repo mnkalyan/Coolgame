@@ -53,7 +53,7 @@ try {
 	currentBuild.result = 'FAILED'
 } finally {
 	for (String i : readFile('testLog.txt').split()) {
-		if ( i =~ Failure ) || ( i =~ FAILED ) {
+		if ( i =~ Failure  || i =~ FAILED ) {
 			currentBuild.result = 'UNSTABLE'
 		}
 	}
