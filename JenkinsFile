@@ -29,6 +29,12 @@ def runUnitTest() {
 				$WORKSPACE/build/runUnitTests > $WORKSPACE/testLog.txt 2>&1 || true #Resulting log will be verified in finally section
 			fi
 		'''
+		for (String i : readFile('testLog.txt').split("\n")) {
+			if ( i =~ "Failure"  || i =~ "FAILED" ) {
+				println "Unit Test Failed, marking build as unstable"
+				currentBuild.result = 'UNSTABLE'
+			}
+		}
 	}
 }
 
@@ -52,10 +58,5 @@ try {
 	println(any.getMessage());
 	currentBuild.result = 'FAILED'
 } finally {
-	for (String i : readFile('testLog.txt').split("\n")) {
-		println i
-		if ( i =~ Failure  || i =~ FAILED ) {
-			currentBuild.result = 'UNSTABLE'
-		}
-	}
+
 }
