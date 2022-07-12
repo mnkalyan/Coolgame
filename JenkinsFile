@@ -12,21 +12,24 @@ def checkout() {
 // Build Stage
 def build () {
     stage ('Build') {
-		echo "My build"
+		sh 'sh -xe cmake_build.sh'
     }
 }
 
 // Run Unit Tests
 def runUnitTest() {
 	stage ('Run Unit Test') {
-		echo "Running Unit Test"
+		sh '''
+			$WORKSPACE/CoolGame
+			$WORKSPACE/runUnitTests
+		'''
 	}
 }
 
 // Archive Artifacts
 def artifactsArchive() {
 	stage ('Archive Artifacts') {
-		echo "Running Unit Test"
+		archiveArtifacts artifacts: 'build/CoolGame*, build/runUnitTests*', followSymlinks: false
 	}
 }
 
