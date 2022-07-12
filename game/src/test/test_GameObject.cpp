@@ -10,7 +10,7 @@ TEST(GameObjectTest, CreateObject)
 
 TEST(GameObjectTest, FailTest)
 {
-	ASSERT_EQ(false, false); //Making both the params as NULL POINTER, inoder to pass the Test
+	ASSERT_EQ(false, true); //Making both the params as NULL POINTER, inoder to pass the Test
 }
 
 
