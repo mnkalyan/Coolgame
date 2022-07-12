@@ -31,7 +31,9 @@ def artifactsArchive() {
 }
 
 //Call the above defined functions
-checkout()
-build ()
-runUnitTest ()
-artifactsArchive ()
+node ('$NODE') {
+	checkout()
+	build ()
+	runUnitTest ()
+	artifactsArchive ()
+}
