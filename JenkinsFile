@@ -13,14 +13,14 @@ def checkout() {
 // Build Stage
 def build () {
     stage ('Build') {
-		bash 'sh -xe cmake_build.sh'
+		sh 'bash -xe cmake_build.sh'
     }
 }
 
 // Run Unit Tests
 def runUnitTest() {
 	stage ('Run Unit Test') {
-		bash '''
+		sh '''
 			$WORKSPACE/build/CoolGame
 			$WORKSPACE/build/runUnitTests
 		'''
