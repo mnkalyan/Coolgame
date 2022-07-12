@@ -6,7 +6,7 @@ cd build
 cmake ..
 cmake --build .
 
-if [[ $RUN_UNIT_TEST == "true" ]]; then
+if [[ $RUN_UNIT_TESTS == "true" ]]; then
 	echo "RUN UNIT Test Set to TRUE, genrating the Makefile with UNIT TEST macros"
 	cmake -Dtest=ON ..
 	cmake --build .
