@@ -20,8 +20,8 @@ def build () {
 def runUnitTest() {
 	stage ('Run Unit Test') {
 		sh '''
-			$WORKSPACE/CoolGame
-			$WORKSPACE/runUnitTests
+			$WORKSPACE/build/CoolGame
+			$WORKSPACE/build/runUnitTests
 		'''
 	}
 }
