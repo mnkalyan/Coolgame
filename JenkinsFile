@@ -26,7 +26,7 @@ def runUnitTest() {
 			rm -fr $WORKSPACE/testLog.txt && touch $WORKSPACE/testLog.txt
 			if [[ "${RUN_UNIT_TESTS}" == "true" ]]; then
 				$WORKSPACE/build/CoolGame
-				$WORKSPACE/build/./runUnitTests > $WORKSPACE/testLog.txt 2>&1 || true #Resulting log will be verified in finally section
+				$WORKSPACE/build/runUnitTests > $WORKSPACE/testLog.txt 2>&1 || true #Resulting log will be verified in finally section
 			fi
 		'''
 	}
