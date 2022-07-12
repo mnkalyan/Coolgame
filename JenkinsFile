@@ -1,1 +1,37 @@
-echo DummyFile
+import hudson.*
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+// Checkout Stage
+def checkout() {
+	stage 'Code Checkout' {
+		checkout([$class: 'GitSCM', branches: [[name: '${BRANCH_NAME}']], extensions: [], userRemoteConfigs: [[credentialsId: '808beb4a-c1c0-4900-a3a3-2c4cdbcd876b', url: 'git@github.com:mnkalyan/Coolgame.git']]])
+	}
+}
+
+// Build Stage
+def build () {
+    stage 'Build' {
+		echo "My build"
+    }
+}
+
+// Run Unit Tests
+def runUnitTest() {
+	stage 'Run Unit Test' {
+		echo "Running Unit Test"
+	}
+}
+
+// Archive Artifacts
+def artifactsArchive() {
+	stage 'Archive Artifacts' {
+		echo "Running Unit Test"
+	}
+}
+
+//Call the above defined functions
+checkout()
+build ()
+runUnitTest ()
+artifactsArchive ()
